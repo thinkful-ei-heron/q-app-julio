@@ -56,5 +56,30 @@ const STORE = {
     }
   ]
 };
+
+// function that will begin the quiz, this function will also be used at the end to restart the quiz
+
+
+// function to update the question
+
+// function to update the score
+
+// function update answer options
+
+// function that displays current question
+
+
+// function that will render score and question 
+
+// function that checks if input is correct, and if not then input a box that will give the user the correct answer,
+    //if the user's input is correct than the page will also render a congratulations page
+
+// function that checks if the end of the question list has been reached; if yes, than restart the quiz
+
+// function that calls all other functions
+
+
+
+
     
   
