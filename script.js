@@ -58,25 +58,62 @@ const STORE = {
 };
 
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
+function beginQuiz(){
 
-
+    console.log('beginQuiz is running');
+}
 // function to update the question
+function updateQuestion(){
 
+    console.log('updateQuestion is running');
+}
 // function to update the score
+function updateScore(){
 
+    console.log('updateScore is running');
+}
 // function update answer options
+function updateOptions(){
 
+    console.log('updateOptions is running');
+}
 // function that displays current question
+function renderQuestion(){
 
-
+    console.log('renderQuestion is running');
+}
 // function that will render score and question 
+function renderStatus(){
 
+    console.log('renderStatus is running');
+}
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
     //if the user's input is correct than the page will also render a congratulations page
+function renderResult(){
 
+    console.log('renderResult is running');
+}
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
+function finalQuestion(){
 
+    console.log('finalQuestion is running');
+}
 // function that calls all other functions
+function callOtherFunctions(){
+    beginQuiz();
+    updateQuestion();
+    updateScore();
+    updateOptions();
+    renderQuestion();
+    renderStatus();
+    renderResult();
+    finalQuestion();
+    console.log('callOtherFunctions is running');
+}
+
+// jQuery function
+
+$(callOtherFunctions);
 
 
 
