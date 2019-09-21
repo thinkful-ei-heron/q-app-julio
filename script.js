@@ -1,3 +1,4 @@
+// https://github.com/thinkful-ei-heron/q-app-julio-wesley.git
 'use strict';
 
 // Store is the questions, answers, correct answers, and score.
@@ -110,14 +111,12 @@ function updateOptions(){
 }
 // function that displays current question
 function renderQuestion(){
+  const html = $('<p>this is running.</p> <button class="submit">Submit</button>');
 
+  $('.quiz-content').html(html);
   console.log('renderQuestion is running');
 }
-// function that will render score and question 
-function renderStatus(){
 
-  console.log('renderStatus is running');
-}
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
 //if the user's input is correct than the page will also render a congratulations page
 function renderResult(){
@@ -132,11 +131,8 @@ function finalQuestion(){
 // function that calls all other functions
 function callOtherFunctions(){
   beginQuiz();
-  //updateQuestion();
-  //updateScore();
   updateOptions();
-  renderQuestion();
-  renderStatus();
+ // renderQuestion();
   renderResult();
   finalQuestion();
   console.log('callOtherFunctions is running');
