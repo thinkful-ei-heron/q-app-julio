@@ -57,58 +57,89 @@ const STORE = {
   ]
 };
 
+let currentQuestion = 0;
+let score = 0;
+
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
 function beginQuiz(){
-
-    console.log('beginQuiz is running');
+  // Resets stopred values to 0 to begin and restart quiz
+  currentQuestion = 0;
+  score = 0;
+  // html posted to page
+  const html = $(`
+  <h2> How well do you rememeber the show The Office? Let's find out.
+  </h2>`);
+  $('.submit').html('start');
+  $('h2').html(html);
+  
+  // listeneer for click to progress. 
+  $('.submit').on('click', e => {
+    e.preventDefault();
+    renderQuestion();
+    updateQuestion();
+    updateScore();
+  }
+  );
+  console.log('beginQuiz is running');
 }
 // function to update the question
 function updateQuestion(){
-
-    console.log('updateQuestion is running');
+  
+  const html = $(`
+  <ul>
+    <li class="question-number">Question Number: ${currentQuestion + 1}/${STORE.questions.length}
+    </li>
+  <ul>`);
+  $('.question-number').html(html);
+  console.log('updateQuestion is running');
 }
 // function to update the score
 function updateScore(){
-
-    console.log('updateScore is running');
+  const html = $(`
+  <ul>
+    <li class="score">Score: ${score}
+    </li>
+  <ul>`);
+  $('.score').html(html);
+  console.log('updateScore is running');
 }
 // function update answer options
 function updateOptions(){
 
-    console.log('updateOptions is running');
+  console.log('updateOptions is running');
 }
 // function that displays current question
 function renderQuestion(){
 
-    console.log('renderQuestion is running');
+  console.log('renderQuestion is running');
 }
 // function that will render score and question 
 function renderStatus(){
 
-    console.log('renderStatus is running');
+  console.log('renderStatus is running');
 }
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
-    //if the user's input is correct than the page will also render a congratulations page
+//if the user's input is correct than the page will also render a congratulations page
 function renderResult(){
 
-    console.log('renderResult is running');
+  console.log('renderResult is running');
 }
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion(){
 
-    console.log('finalQuestion is running');
+  console.log('finalQuestion is running');
 }
 // function that calls all other functions
 function callOtherFunctions(){
-    beginQuiz();
-    updateQuestion();
-    updateScore();
-    updateOptions();
-    renderQuestion();
-    renderStatus();
-    renderResult();
-    finalQuestion();
-    console.log('callOtherFunctions is running');
+  beginQuiz();
+  //updateQuestion();
+  //updateScore();
+  updateOptions();
+  renderQuestion();
+  renderStatus();
+  renderResult();
+  finalQuestion();
+  console.log('callOtherFunctions is running');
 }
 
 // jQuery function
