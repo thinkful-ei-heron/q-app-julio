@@ -150,22 +150,26 @@ function renderResult(){
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
-  $('body').on('click', '#next-guestion', e => {
-    e.preventDefault();
-    STORE.currentQuestion === STORE.questions.length ? updateScore() : renderQuestion(); 
-    
-    console.log(userAnswer);
-  })
-  // userAnswer needs to be the value of the radio button the user clicks
-  //console.log(userAnswer);
-  console.log(STORE.questions[currentQuestion].correctAnswer);
-  //let userSelection = $('.submit[name=options]:checked', '#f1').val();
-  if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
-    $('h1').html('you got it right!!');
-  } else {
-    $('h1').html(
-      'you got it wrong!!');
-  }
+  let select = STORE.questions[STORE.currentQuestion];
+  return ans = select.correctAnswer;
+  // $('body').on('click', '.form', e => {
+  //   e.preventDefault();
+  //   let curQ = STORE.questions[STORE.currentQuestion];
+  //   let optionSel = $('input[name=radio]:checked').val();
+  //   if(!optionSel) {
+  //     alert("No Option Selected");
+  //   }
+  // })
+  // // userAnswer needs to be the value of the radio button the user clicks
+  // //console.log(userAnswer);
+  // console.log(STORE.questions[currentQuestion].correctAnswer);
+  // //let userSelection = $('.submit[name=options]:checked', '#f1').val();
+  // if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
+  //   $('h1').html('you got it right!!');
+  // } else {
+  //   $('h1').html(
+  //     'you got it wrong!!');
+  // }
 }
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion(){
