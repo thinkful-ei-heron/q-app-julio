@@ -60,6 +60,8 @@ const STORE = {
 
 let currentQuestion = 0;
 let score = 0;
+// let question = STORE.questions[currentQuestion];
+// console.log(question);
 
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
 function beginQuiz(){
@@ -79,6 +81,7 @@ function beginQuiz(){
     renderQuestion();
     updateQuestion();
     updateScore();
+    updateOptions();
   }
   );
   console.log('beginQuiz is running');
@@ -104,6 +107,8 @@ function updateScore(){
   $('.score').html(html);
   console.log('updateScore is running');
 }
+
+
 // function update answer options
 function updateOptions(){
   for ( let i=0; i< STORE.questions[currentQuestion].answerOptions.length; i++){
@@ -119,11 +124,13 @@ function updateOptions(){
     $('.submit').parent().html(html);
   console.log('updateOptions is running');
 }
+
+
 // function that displays current question
 function renderQuestion(){
-  const html = $('<p>this is running.</p> <button class="submit">Submit</button>');
-
-  $('.quiz-content').html(html);
+  console.log(STORE.questions[currentQuestion].question);
+  const html = $(`<h2>${STORE.questions[currentQuestion].question}</h2>`);
+  $('h2').html(html);
   console.log('renderQuestion is running');
 }
 
@@ -155,7 +162,7 @@ function finalQuestion(){
 // function that calls all other functions
 function callOtherFunctions(){
   beginQuiz();
-  updateOptions();
+ // updateOptions();
  // renderQuestion();
   renderResult();
   finalQuestion();
