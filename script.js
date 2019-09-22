@@ -111,20 +111,25 @@ function updateScore(){
 
 // function update answer options
 function updateOptions(){
+  
   for ( let i=0; i< STORE.questions[currentQuestion].answerOptions.length; i++){
     let option = [];
     option.push(STORE.questions[currentQuestion].answerOptions[i]);
     let html = $(`
-    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i]}>${STORE.questions[currentQuestion].answerOptions[i]}</input>
-    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 1]}>${STORE.questions[currentQuestion].answerOptions[i + 1]}</input>
-    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 2]}>${STORE.questions[currentQuestion].answerOptions[i + 2]}</input>
-    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 3]}>${STORE.questions[currentQuestion].answerOptions[i + 3]}</input>
-    `);
-   
-    $('.submit').parent().html(html);
+    <form class = "form">
+      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i]}>${STORE.questions[currentQuestion].answerOptions[i]}</input><br>
+      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 1]}>${STORE.questions[currentQuestion].answerOptions[i + 1]}</input><br>
+      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 2]}>${STORE.questions[currentQuestion].answerOptions[i + 2]}</input><br>
+      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 3]}>${STORE.questions[currentQuestion].answerOptions[i + 3]}</input><br>
+      <button class="submit">Submit</button>
+    </form>
+      `);
+    $('.quiz-content').parent().html(html);
+    // $('.submit').html('<button class="submit"></button>');
   console.log('updateOptions is running');
-}
+  }
 
+}
 
 // function that displays current question
 function renderQuestion(){
@@ -172,9 +177,3 @@ function callOtherFunctions(){
 // jQuery function
 
 $(callOtherFunctions);
-
-
-
-
-    
-  
