@@ -66,13 +66,13 @@ let score = 0;
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
 function beginQuiz(){
   // Resets stopred values to 0 to begin and restart quiz
-  currentQuestion = 0;
+  let currentQuestion = 0;
   score = 0;
   // html posted to page
   const html = $(`
   <h2> How well do you rememeber the show The Office? Let's find out.
   </h2>`);
-  $('.submit').html('start');
+  $('.submit').html('Start');
   $('h2').html(html);
   
   // listeneer for click to progress. 
@@ -82,8 +82,10 @@ function beginQuiz(){
     updateQuestion();
     updateScore();
     updateOptions();
+    currentQuestion++;
   }
   );
+  console.log(currentQuestion);
   console.log('beginQuiz is running');
 }
 // function to update the question
@@ -108,28 +110,28 @@ function updateScore(){
   console.log('updateScore is running');
 }
 
-
+// currentQuestion = 4 ; 
 // function update answer options
 function updateOptions(){
+  console.log(currentQuestion);
+  let optionList = STORE.questions[currentQuestion].answerOptions ;
   
-  for ( let i=0; i< STORE.questions[currentQuestion].answerOptions.length; i++){
-    let option = [];
-    option.push(STORE.questions[currentQuestion].answerOptions[i]);
+  for ( let i=0; i< optionList.length; i++){
     let html = $(`
     <form class = "form">
-      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i]}>${STORE.questions[currentQuestion].answerOptions[i]}</input><br>
-      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 1]}>${STORE.questions[currentQuestion].answerOptions[i + 1]}</input><br>
-      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 2]}>${STORE.questions[currentQuestion].answerOptions[i + 2]}</input><br>
-      <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 3]}>${STORE.questions[currentQuestion].answerOptions[i + 3]}</input><br>
-      <button class="submit">Submit</button>
+      <input type='radio' name='radio' value=${optionList[i]}>${optionList[i]}</input><br>
+      <input type='radio' name='radio' value=${optionList[i + 1]}>${optionList[i + 1]}</input><br>
+      <input type='radio' name='radio' value=${optionList[i + 2]}>${optionList[i + 2]}</input><br>
+      <input type='radio' name='radio' value=${optionList[i + 3]}>${optionList[i + 3]}</input><br>
+      <button class="submit" id="next-question">Submit</button>
     </form>
       `);
     $('.quiz-content').parent().html(html);
-    // $('.submit').html('<button class="submit"></button>');
-  console.log('updateOptions is running');
+  
+    console.log('updateOptions is running');
   }
-
 }
+
 
 // function that displays current question
 function renderQuestion(){
@@ -148,6 +150,12 @@ function renderResult(){
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
+  $('body').on('click', '#next-guestion', e => {
+    e.preventDefault();
+    STORE.currentQuestion === STORE.questions.length ? updateScore() : renderQuestion(); 
+    
+    console.log(userAnswer);
+  })
   // userAnswer needs to be the value of the radio button the user clicks
   //console.log(userAnswer);
   console.log(STORE.questions[currentQuestion].correctAnswer);
@@ -167,8 +175,6 @@ function finalQuestion(){
 // function that calls all other functions
 function callOtherFunctions(){
   beginQuiz();
- // updateOptions();
- // renderQuestion();
   renderResult();
   finalQuestion();
   console.log('callOtherFunctions is running');
