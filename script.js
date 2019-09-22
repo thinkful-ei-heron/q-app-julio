@@ -150,8 +150,18 @@ function renderResult(){
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
-  let select = STORE.questions[STORE.currentQuestion];
-  return ans = select.correctAnswer;
+//   let bool = (answer) => {
+//     let select = STORE.questions[STORE.currentQuestion];
+//     return userAnswer === select.correctAnswer;
+//   }
+//   $('form').on('click','#next-question', e => {
+//     e.preventDefault();
+//     let usrInput = $('input[name=radio]:checked').val();
+//     if (usrInput) {
+//       let win = 
+//     }
+//   })
+// }
   // $('body').on('click', '.form', e => {
   //   e.preventDefault();
   //   let curQ = STORE.questions[STORE.currentQuestion];
@@ -170,7 +180,7 @@ function verifyAnswer(userAnswer) {
   //   $('h1').html(
   //     'you got it wrong!!');
   // }
-}
+
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion(){
 
