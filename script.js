@@ -106,7 +106,17 @@ function updateScore(){
 }
 // function update answer options
 function updateOptions(){
-
+  for ( let i=0; i< STORE.questions[currentQuestion].answerOptions.length; i++){
+    let option = [];
+    option.push(STORE.questions[currentQuestion].answerOptions[i]);
+    let html = $(`
+    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i]}>${STORE.questions[currentQuestion].answerOptions[i]}</input>
+    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 1]}>${STORE.questions[currentQuestion].answerOptions[i + 1]}</input>
+    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 2]}>${STORE.questions[currentQuestion].answerOptions[i + 2]}</input>
+    <input type='radio' name='radio' value=${STORE.questions[currentQuestion].answerOptions[i + 3]}>${STORE.questions[currentQuestion].answerOptions[i + 3]}</input>
+    `);
+   
+    $('.submit').parent().html(html);
   console.log('updateOptions is running');
 }
 // function that displays current question
@@ -122,6 +132,20 @@ function renderQuestion(){
 function renderResult(){
 
   console.log('renderResult is running');
+}
+
+// Checks the value of user inpout to correct answer and evaluates
+function verifyAnswer(userAnswer) {
+  // userAnswer needs to be the value of the radio button the user clicks
+  //console.log(userAnswer);
+  console.log(STORE.questions[currentQuestion].correctAnswer);
+  //let userSelection = $('.submit[name=options]:checked', '#f1').val();
+  if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
+    $('h1').html('you got it right!!');
+  } else {
+    $('h1').html(
+      'you got it wrong!!');
+  }
 }
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion(){
