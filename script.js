@@ -72,11 +72,11 @@ function beginQuiz(){
   const html = $(`
   <h2> How well do you rememeber the show The Office? Let's find out.
   </h2>`);
-  $('.submit').html('Start');
+  $('.start').html('Start');
   $('h2').html(html);
   
   // listeneer for click to progress. 
-  $('.submit').on('click', e => {
+  $('.start').on('click', e => {
     e.preventDefault();
     renderQuestion();
     updateQuestion();
@@ -103,7 +103,7 @@ function updateQuestion(){
 function updateScore(){
   const html = $(`
   <ul>
-    <li class="score">Score: ${score}
+    <li class="score">Score: ${score + 1}
     </li>
   <ul>`);
   $('.score').html(html);
@@ -151,16 +151,19 @@ function renderResult(){
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
 //   
-  $('.submit').on('submit', e => {
+  $('.quiz-content').on('submit', e => {
     e.preventDefault();
-    let usrInput = $('input:checked').val();
+    let usrInput = $('input:checked');
+    let usrAns = usrInput.val();
+    console.log(usrAns);
     let correct = STORE[currentQuestion].correctAnswer;
-    if(usrInput === correct) {
-      // feedback for correct answer
+    if(usrAns === correct) {
+      // feedback for correct answer & should run updateScore 
     } else {
       // feedback for wrong answer 
     }
   })
+}
 // function submitAnswer() {
 //   $('.jungleBox').on('submit', function (event) {
 //     event.preventDefault();
