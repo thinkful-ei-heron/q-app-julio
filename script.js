@@ -93,10 +93,10 @@ function beginQuiz() {
     submitAnswer();
   }
   );
-  // console.log(currentQuestion);
   // console.log('beginQuiz is running');
 }
-// function to update the question
+
+// function to update the displayed question number
 function updateQuestion() {
   const html = $(`
   <ul>
@@ -105,7 +105,8 @@ function updateQuestion() {
   $('.question').html(html);
   // console.log('updateQuestion is running');
 }
-// function to update the score
+
+// function to update the displayed score
 function renderScore() {
   const html = $(`
   <ul>
@@ -115,7 +116,6 @@ function renderScore() {
   // console.log('updateScore is running');
 }
 
-// currentQuestion = 4 ; 
 // function update answer options
 function generateUpdateOptionsHTML() {
   let optionList = STORE.questions[currentQuestion].answerOptions;
@@ -150,9 +150,9 @@ function submitAnswer() {
 }
 
 function nextQuestion(){
-  $('main').on('submit','.submit', e => {
+  $('#next-question').on('submit','#next-question', e => {
+    console.log('nextQuestion is runnnnnnning');
     e.preventDefault();
-    console.log('nextQuestion is runnnnnning.');
     currentQuestion++;
     renderQuestion();
     updateQuestion();
