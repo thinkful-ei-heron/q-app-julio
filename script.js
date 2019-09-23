@@ -71,7 +71,13 @@ function beginQuiz(){
   // html posted to page
   const html = $(`
   <h2> How well do you rememeber the show The Office? Let's find out.
-  </h2>`);
+  </h2>
+  <form  class ='start'>
+            <div class="quiz-content">
+                <button class="submit" type='submit'></button>
+         </div> 
+            </form>`
+  );
   $('.start').html('Start');
   $('h2').html(html);
   
@@ -217,8 +223,8 @@ function finalQuestion(){
 // function that calls all other functions
 function callOtherFunctions(){
   beginQuiz();
-  renderResult();
-  finalQuestion();
+  //renderResult();
+  //finalQuestion();
   console.log('callOtherFunctions is running');
 }
 
