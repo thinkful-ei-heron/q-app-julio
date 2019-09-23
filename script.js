@@ -56,17 +56,15 @@ const STORE = {
       correctAnswer: '...the flippity flop.'
     }
   ],
-  message: '',
+  correctMessage: 'You are right!',
+  wrongMessege: 'You are wrong!',
   answered: false,
   quizStarted: false,
   currentQuestion: 0,
   score: 0,
-  usrAns:null,
-
+  usrAns: null,
 };
 
-let score = 0;
-let usrAns ;
 
 // get the right Question displayed, get scoring and feedback working.
 
@@ -96,7 +94,7 @@ function handleNextQuestionButton(){
 function render(){
   if ( STORE.answered === true){
     let html = `
-  <p>You Are Right!</p>
+  <p><span class="feedback"></span></p>
   <button id="nextQuestion">Next Question</button>
   `;
     $('main').html(html);
@@ -114,12 +112,21 @@ function render(){
     $('main').html(html);
   } else {
     addQuestionToPage();
+    statusOfQuiz();
   }
 }
 
 
 
-
+function statusOfQuiz() {
+  const html = `
+  <ul>
+     <li class="question-number">Question Number: ${STORE.currentQuestion}/5</li>
+     <li class="score">Score: ${STORE.score}</li>
+  </ul>
+  `
+  $('h2').after(html);
+}
 
 
 
@@ -164,23 +171,39 @@ function addQuestionToPage() {
   // generates current options
   let options = generateUpdateOptionsHTML();
   // add the current question
-  let question = `<h2>hello world</h2>`;
+  let question = `<h2>${STORE.questions[STORE.currentQuestion].question}</h2>`;
   $('main').html(question + options);
-
 }
 
 function submitAnswer() {
+  let correct = STORE.questions[STORE.currentQuestion].correctAnswer;
   $('main').on('submit','.questions', e => {
-
     e.preventDefault();
     STORE.answered = true;
-    //e.renderResult();
     let usrInput = $('input:checked');
-    usrAns = usrInput.val();
+    STORE.usrAns = usrInput.val();
     render();
   });
-  //verifyAnswer();
+  if(STORE.usrAns === correct) {
+    $('main').html(STORE.correctMessage);
+  } else {
+    console.log(STORE.wrongMessege)
+  }
 }
+
+// function verifyAnswer() {
+//   let correct = STORE.questions[STORE.currentQuestion].correctAnswer;
+//   console.log('this ran');
+//   console.log('is this running?')
+//   $('main').on('submit','.questions', e => {
+//     e.preventDefault();
+//     if (usrAns === correct) {
+//       return 'You are correct!'
+//     } else {
+//       return 'You are inccorect!'
+//     }
+//   })
+// }
 
 function nextQuestion(){
   $('#next-question').on('submit','#next-question', e => {
@@ -221,21 +244,6 @@ function nextQuestion(){
 // }
 
 // Checks the value of user inpout to correct answer and evaluates
-// function verifyAnswer() {
-//   let correct = STORE.questions[currentQuestion].correctAnswer;
-//   console.log('this ran');
-//   console.log('is this running?')
-//   $('main').on('submit','.questions', e => {
-//     e.preventDefault();
-//     if (usrAns === correct) {
-//       console.log('you are right');
-//       renderRight(); 
-//     } else {
-//       console.log('you are wrong');
-//       renderWrong();
-//     }
-//   })
-// }
 
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion() {
