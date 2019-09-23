@@ -66,8 +66,8 @@ let usrAns ;
 
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
 function beginQuiz() {
-  // Resets stopred values to 0 to begin and restart quiz
-  let currentQuestion = 0;
+  // Resets stored values to 0 to begin and restart quiz
+  currentQuestion = 0;
   score = 0;
   // html posted to page
   const html = $(`
@@ -82,12 +82,12 @@ function beginQuiz() {
   // $('.start').html('Start');
   $('h2').html(html);
 
-  // listeneer for click to progress. 
+  // listener for click to progress. 
   $('.start').on('submit', e => {
     e.preventDefault();
     renderQuestion();
     updateQuestion();
-    updateScore();
+    renderScore();
     generateUpdateOptionsHTML();
     addQuestionToPage();
     submitAnswer();
@@ -102,14 +102,14 @@ function updateQuestion() {
   <ul>
     <li class="question-number">Question Number: ${currentQuestion+1}/5</li>
   <ul>`);
-  $('.scoreAndQuestion').html(html);
+  $('.question').html(html);
   // console.log('updateQuestion is running');
 }
 // function to update the score
-function updateScore() {
+function renderScore() {
   const html = $(`
   <ul>
-    <li class="score">Score: ${score + 1}</li>
+    <li class="score">Score: ${score}</li>
   <ul>`);
   $('.score').html(html);
   // console.log('updateScore is running');
@@ -149,6 +149,19 @@ function submitAnswer() {
   verifyAnswer();
 }
 
+function nextQuestion(){
+  $('main').on('submit','.submit', e => {
+    e.preventDefault();
+    console.log('nextQuestion is runnnnnning.');
+    currentQuestion++;
+    renderQuestion();
+    updateQuestion();
+    renderScore();
+    generateUpdateOptionsHTML();
+    addQuestionToPage();
+    submitAnswer();
+  });
+}
 
 // function that displays current question
 function renderQuestion() {
@@ -162,15 +175,19 @@ function renderQuestion() {
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
 //if the user's input is correct than the page will also render a congratulations page
 function renderRight() {
-  let html = '<p>You Are Right!</p>';
-  $('.question-number').after(html);
-  updateScore();
+  score++;
+  let html = `
+  <p>You Are Right!</p>`;
+  $('.questions').after(html);
+  renderScore();
+  nextQuestion();
   console.log('renderRight is running');
 }
 
 function renderWrong() {
-  let html = '<p>You are Wrong!</p>';
-  $('.question-number').after(html);
+  let html = `<p>You are Wrong! The correct answer was ${STORE.questions[currentQuestion].correctAnswer}.</p>`;
+  $('.questions').after(html);
+  nextQuestion();
   console.log('renderWrong is running');
 }
 
