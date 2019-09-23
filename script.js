@@ -155,7 +155,7 @@ function verifyAnswer(userAnswer) {
     STORE.currentQuestion === STORE.questions.length ? updateScore() : renderQuestion(); 
     
     console.log(userAnswer);
-  })
+  });
   // userAnswer needs to be the value of the radio button the user clicks
   //console.log(userAnswer);
   console.log(STORE.questions[currentQuestion].correctAnswer);
