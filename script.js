@@ -95,7 +95,7 @@ function beginQuiz() {
 function endResults() {
   let resultHTML =
     `<p> Your Score is ${STORE.score} / 5 ! </p>
-     <button id="restart">Restart Quiz</button>`;
+     <button id="nextQuestion">Restart Quiz</button>`;
   STORE.currentQuestion = 0 ;
   STORE.score = 0 ;
   STORE.quizStarted = false;
@@ -103,17 +103,6 @@ function endResults() {
   console.log('hey there');
 }
 
-// function handleEndResult() {
-//   $('main').on('click','#restart',(event) => { 
-//     if(STORE.questions[STORE.currentQuestion].answerOptions === undefinded) {
-//       endResults();
-//     } else {
-//       handleNextQuestionButton();
-//     }
-//   }) 
-// } 
-console.log(STORE.currentQuestion)
-console.log(STORE.questions.length)
 
 function handleNextQuestionButton(){
   $('main').on('click','#nextQuestion', e => {
