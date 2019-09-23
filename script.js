@@ -101,27 +101,33 @@ function endResults() {
   STORE.score = 0 ;
   STORE.quizStarted = false;
   $("main").html(resultHTML);
+  console.log('hey there');
 }
 
-function handleEndResult() {
-  
-  $('main').on('click','#restart',(event) => { 
-    if(STORE.currentQuestion === STORE.questions.length) {
-      endResults();
-    } else {
-      handleNextQuestionButton();
-    }
-  }) 
-}
-
+// function handleEndResult() {
+//   $('main').on('click','#restart',(event) => { 
+//     if(STORE.questions[STORE.currentQuestion].answerOptions === undefinded) {
+//       endResults();
+//     } else {
+//       handleNextQuestionButton();
+//     }
+//   }) 
+// } 
+console.log(STORE.currentQuestion)
+console.log(STORE.questions.length)
 
 function handleNextQuestionButton(){
-  $('main').on('click','#nextQuestion', e => {
-    e.preventDefault();
-    STORE.currentQuestion++;
-    STORE.answered = false;
+  if(STORE.currentQuestion !== 4) {
+    $('main').on('click','#nextQuestion', e => {
+      e.preventDefault();
+      STORE.currentQuestion++;
+      STORE.answered = false;
+      render();
+    });
+  } else {
+    endResults();
     render();
-  });
+  }
 }
 
 function render(){
@@ -191,6 +197,7 @@ function submitAnswer() {
     STORE.usrAns = usrInput.val();
     render();
     verifyAnswer();
+    console.log(STORE.currentQuestion);
   });
 }
   
@@ -204,14 +211,6 @@ function verifyAnswer() {
   }
 }
 
-function nextQuestion(){
-  $('#next-question').on('submit','#next-question', e => {
-    console.log('nextQuestion is runnnnnnning');
-    e.preventDefault();
-    STORE.currentQuestion++;
-    render();
-  });
-}
 // Checks the value of user inpout to correct answer and evaluates
 
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
@@ -221,7 +220,6 @@ function callOtherFunctions() {
   beginQuiz();
   submitAnswer();
   handleNextQuestionButton();
-  endResults();
   render();
 }
 
