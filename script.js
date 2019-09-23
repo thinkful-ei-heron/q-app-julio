@@ -147,15 +147,34 @@ function renderResult(){
 
   console.log('renderResult is running');
 }
-
+  
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
-//   let bool = (answer) => {
+//   
+
+// function submitAnswer() {
+//   $('.jungleBox').on('submit', function (event) {
+//     event.preventDefault();
+//     $('.altBox').hide();
+//     $('.response').show();
+//     let selected = $('input:checked');       IDEA 1
+//     let answer = selected.val();
+//     let correct = STORE[questionNumber].correctAnswer;
+//     if (answer === correct) {
+//       correctAnswer();
+//     } else {
+//       wrongAnswer();
+//     }
+//   });
+// }
+
+
+//     let bool = (answer) => {
 //     let select = STORE.questions[STORE.currentQuestion];
 //     return userAnswer === select.correctAnswer;
 //   }
 //   $('form').on('click','#next-question', e => {
-//     e.preventDefault();
+//     e.preventDefault();                                       IDEA 2
 //     let usrInput = $('input[name=radio]:checked').val();
 //     if (usrInput) {
 //       let win = 
@@ -164,7 +183,7 @@ function verifyAnswer(userAnswer) {
 // }
   // $('body').on('click', '.form', e => {
   //   e.preventDefault();
-  //   let curQ = STORE.questions[STORE.currentQuestion];
+  //   let curQ = STORE.questions[STORE.currentQuestion];             IDEA 3
   //   let optionSel = $('input[name=radio]:checked').val();
   //   if(!optionSel) {
   //     alert("No Option Selected");
@@ -173,7 +192,7 @@ function verifyAnswer(userAnswer) {
   // // userAnswer needs to be the value of the radio button the user clicks
   // //console.log(userAnswer);
   // console.log(STORE.questions[currentQuestion].correctAnswer);
-  // //let userSelection = $('.submit[name=options]:checked', '#f1').val();
+  // //let userSelection = $('.submit[name=options]:checked', '#f1').val();      IDEA 4 - USER FEEDBACK
   // if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
   //   $('h1').html('you got it right!!');
   // } else {
