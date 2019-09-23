@@ -8,9 +8,9 @@ const STORE = {
     {
       question: 'What did Jim get Pam as a secret Santa gift?',
       answerOptions: [
-        'An iPod', 
-        'A book', 
-        'A teapot', 
+        'An iPod',
+        'A book',
+        'A teapot',
         'A toothbrush'
       ],
       correctAnswer: 'A teapot'
@@ -18,9 +18,9 @@ const STORE = {
     { //2
       question: 'Kevin\'s family has a secret family recipie for?',
       answerOptions: [
-        'Lasagna', 
-        'Chilli', 
-        'Tacos', 
+        'Lasagna',
+        'Chilli',
+        'Tacos',
         'Meatballs'
       ],
       correctAnswer: 'Chilli'
@@ -28,9 +28,9 @@ const STORE = {
     { //3
       question: 'What is the name of Jan\'s talanted assistant?',
       answerOptions: [
-        'David Wallace', 
-        'Pete', 
-        'Clayton', 
+        'David Wallace',
+        'Pete',
+        'Clayton',
         'Hunter'
       ],
       correctAnswer: 'Hunter'
@@ -38,9 +38,9 @@ const STORE = {
     { //4
       question: 'The office olympics included what sport?',
       answerOptions: [
-        'Table-tennis', 
-        'Sputnick', 
-        'Flonkerton', 
+        'Table-tennis',
+        'Sputnick',
+        'Flonkerton',
         'Blomp-top'
       ],
       correctAnswer: 'Flonkerton'
@@ -48,9 +48,9 @@ const STORE = {
     { //5
       question: 'This quiz is over, "catch you on..."?',
       answerOptions: [
-        '...the flip side.', 
-        '...the flippity flop.', 
-        '...the other side.', 
+        '...the flip side.',
+        '...the flippity flop.',
+        '...the other side.',
         'Toothbrush.'
       ],
       correctAnswer: '...the flippity flop.'
@@ -64,82 +64,90 @@ let score = 0;
 // console.log(question);
 
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
-function beginQuiz(){
+function beginQuiz() {
   // Resets stopred values to 0 to begin and restart quiz
   let currentQuestion = 0;
   score = 0;
   // html posted to page
   const html = $(`
-  <h2> How well do you rememeber the show The Office? Let's find out.
+  <h2> How well do you remember the show The Office? Let's find out.
   </h2>
-  <form  class ='start'>
-            <div class="quiz-content">
-                <button class="submit" type='submit'></button>
-         </div> 
-            </form>`
+  <form class ='start'>
+    <div class="quiz-content">
+      <button class="submit" type='submit'>Start</button>
+    </div> 
+  </form>`
   );
-  $('.start').html('Start');
+  // $('.start').html('Start');
   $('h2').html(html);
-  
+
   // listeneer for click to progress. 
-  $('.start1').on('submit', e => {
+  $('.start').on('submit', e => {
     e.preventDefault();
     renderQuestion();
     updateQuestion();
     updateScore();
-    updateOptions();
+    generateUpdateOptionsHTML();
+    addQuestionToPage();
+    submitAnswer();
   }
   );
-  console.log(currentQuestion);
-  console.log('beginQuiz is running');
+  // console.log(currentQuestion);
+  // console.log('beginQuiz is running');
 }
 // function to update the question
-function updateQuestion(){
+function updateQuestion() {
   const html = $(`
   <ul>
     <li class="question-number">Question Number: ${currentQuestion + 1}/${STORE.questions.length}
     </li>
   <ul>`);
   $('.question-number').html(html);
-  console.log('updateQuestion is running');
+  // console.log('updateQuestion is running');
 }
 // function to update the score
-function updateScore(){
+function updateScore() {
   const html = $(`
   <ul>
     <li class="score">Score: ${score + 1}
     </li>
   <ul>`);
   $('.score').html(html);
-  console.log('updateScore is running');
+  // console.log('updateScore is running');
 }
 
 // currentQuestion = 4 ; 
 // function update answer options
-function updateOptions(){
-  console.log(currentQuestion);
-  let optionList = STORE.questions[currentQuestion].answerOptions ;
-  
-  for ( let i=0; i< optionList.length; i++){
-    let html = $(`
-    <form class = "form">
+function generateUpdateOptionsHTML() {
+  let optionList = STORE.questions[currentQuestion].answerOptions;
+  let html = '<form class="questions">';
+  for (let i = 0; i < optionList.length; i++) {
+    html += `
       <input type='radio' name='radio' value=${optionList[i]}>${optionList[i]}</input><br>
-      <input type='radio' name='radio' value=${optionList[i + 1]}>${optionList[i + 1]}</input><br>
-      <input type='radio' name='radio' value=${optionList[i + 2]}>${optionList[i + 2]}</input><br>
-      <input type='radio' name='radio' value=${optionList[i + 3]}>${optionList[i + 3]}</input><br>
-      <button class="submit" id="next-question" type="submit">Submit</button>
-    </form>
-      `);
-    $('.quiz-content').parent().html(html);
-  
-    console.log('updateOptions is running');
+    `;
   }
+  html += `
+    <button class="submit" id="next-question" type="submit">Submit</button>
+    </form>
+    `;
+  return html;
+}
+
+function addQuestionToPage() {
+  $('main').html(generateUpdateOptionsHTML());
+}
+
+function submitAnswer() {
+  $('main').on('submit', '.questions', e => {
+    console.log('questions form submitted');
+    e.preventDefault();
+  });
 }
 
 
 // function that displays current question
-function renderQuestion(){
-  let curQue = STORE.questions[currentQuestion].question ;
+function renderQuestion() {
+  let curQue = STORE.questions[currentQuestion].question;
   console.log(curQue);
   const html = $(`<h2>${curQue}</h2>`);
   $('h2').html(html);
@@ -148,21 +156,22 @@ function renderQuestion(){
 
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
 //if the user's input is correct than the page will also render a congratulations page
-function renderResult(){
+function renderResult() {
 
   console.log('renderResult is running');
 }
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
-//   
-  $('.form').on('submit', e => {
+  console.log('is this running?')
+  $('main').on('submit', '.questions', e => {
     e.preventDefault();
+
     let usrInput = $('input:checked');
     let usrAns = usrInput.val();
     console.log(usrAns);
     let correct = STORE[currentQuestion].correctAnswer;
-    if(usrAns === correct) {
+    if (usrAns === correct) {
       // feedback for correct answer & should run updateScore 
     } else {
       // feedback for wrong answer 
@@ -196,36 +205,36 @@ function verifyAnswer(userAnswer) {
 //     }
 //   })
 // }
-  // $('body').on('click', '.form', e => {
-  //   e.preventDefault();
-  //   let curQ = STORE.questions[STORE.currentQuestion];             IDEA 3
-  //   let optionSel = $('input[name=radio]:checked').val();
-  //   if(!optionSel) {
-  //     alert("No Option Selected");
-  //   }
-  // })
-  // // userAnswer needs to be the value of the radio button the user clicks
-  // //console.log(userAnswer);
-  // console.log(STORE.questions[currentQuestion].correctAnswer);
-  // //let userSelection = $('.submit[name=options]:checked', '#f1').val();      IDEA 4 - USER FEEDBACK
-  // if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
-  //   $('h1').html('you got it right!!');
-  // } else {
-  //   $('h1').html(
-  //     'you got it wrong!!');
-  // }
+// $('body').on('click', '.form', e => {
+//   e.preventDefault();
+//   let curQ = STORE.questions[STORE.currentQuestion];             IDEA 3
+//   let optionSel = $('input[name=radio]:checked').val();
+//   if(!optionSel) {
+//     alert("No Option Selected");
+//   }
+// })
+// // userAnswer needs to be the value of the radio button the user clicks
+// //console.log(userAnswer);
+// console.log(STORE.questions[currentQuestion].correctAnswer);
+// //let userSelection = $('.submit[name=options]:checked', '#f1').val();      IDEA 4 - USER FEEDBACK
+// if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
+//   $('h1').html('you got it right!!');
+// } else {
+//   $('h1').html(
+//     'you got it wrong!!');
+// }
 
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
-function finalQuestion(){
+function finalQuestion() {
 
-  console.log('finalQuestion is running');
+  // console.log('finalQuestion is running');
 }
 // function that calls all other functions
-function callOtherFunctions(){
+function callOtherFunctions() {
   beginQuiz();
   //renderResult();
   //finalQuestion();
-  console.log('callOtherFunctions is running');
+  // console.log('callOtherFunctions is running');
 }
 
 // jQuery function
