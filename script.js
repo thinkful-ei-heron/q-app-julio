@@ -9,11 +9,11 @@ const STORE = {
       question: 'What did Jim get Pam as a secret Santa gift?',
       answerOptions: [
         'An iPod',
-        'A book',
-        'A teapot',
-        'A toothbrush'
+        'A Book',
+        'A Teapot',
+        'A Toothbrush'
       ],
-      correctAnswer: 'A teapot'
+      correctAnswer:  'A Teapot'
     },
     { //2
       question: 'Kevin\'s family has a secret family recipie for?',
@@ -60,6 +60,7 @@ const STORE = {
 
 let currentQuestion = 0;
 let score = 0;
+let usrAns ;
 // let question = STORE.questions[currentQuestion];
 // console.log(question);
 
@@ -99,18 +100,16 @@ function beginQuiz() {
 function updateQuestion() {
   const html = $(`
   <ul>
-    <li class="question-number">Question Number: ${currentQuestion + 1}/${STORE.questions.length}
-    </li>
+    <li class="question-number">Question Number: ${currentQuestion+1}/5</li>
   <ul>`);
-  $('.question-number').html(html);
+  $('.scoreAndQuestion').html(html);
   // console.log('updateQuestion is running');
 }
 // function to update the score
 function updateScore() {
   const html = $(`
   <ul>
-    <li class="score">Score: ${score + 1}
-    </li>
+    <li class="score">Score: ${score + 1}</li>
   <ul>`);
   $('.score').html(html);
   // console.log('updateScore is running');
@@ -123,7 +122,7 @@ function generateUpdateOptionsHTML() {
   let html = '<form class="questions">';
   for (let i = 0; i < optionList.length; i++) {
     html += `
-      <input type='radio' name='radio' value=${optionList[i]}>${optionList[i]}</input><br>
+      <input type='radio' name='radio' value="${optionList[i]}">${optionList[i]}</input><br>
     `;
   }
   html += `
@@ -138,10 +137,16 @@ function addQuestionToPage() {
 }
 
 function submitAnswer() {
-  $('main').on('submit', '.questions', e => {
+  $('main').on('submit','.questions', e => {
     console.log('questions form submitted');
     e.preventDefault();
+    //e.renderResult();
+    let usrInput = $('input:checked');
+    usrAns = usrInput.val();
+    console.log(usrAns);
+    console.log(STORE.questions[currentQuestion].correctAnswer);
   });
+  verifyAnswer();
 }
 
 
@@ -156,73 +161,35 @@ function renderQuestion() {
 
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
 //if the user's input is correct than the page will also render a congratulations page
-function renderResult() {
+function renderRight() {
+  let html = '<p>You Are Right!</p>';
+  $('.question-number').after(html);
+  updateScore();
+  console.log('renderRight is running');
+}
 
-  console.log('renderResult is running');
+function renderWrong() {
+  let html = '<p>You are Wrong!</p>';
+  $('.question-number').after(html);
+  console.log('renderWrong is running');
 }
 
 // Checks the value of user inpout to correct answer and evaluates
-function verifyAnswer(userAnswer) {
+function verifyAnswer() {
+  let correct = STORE.questions[currentQuestion].correctAnswer;
+  console.log('this ran');
   console.log('is this running?')
-  $('main').on('submit', '.questions', e => {
+  $('main').on('submit','.questions', e => {
     e.preventDefault();
-
-    let usrInput = $('input:checked');
-    let usrAns = usrInput.val();
-    console.log(usrAns);
-    let correct = STORE[currentQuestion].correctAnswer;
     if (usrAns === correct) {
-      // feedback for correct answer & should run updateScore 
+      console.log('you are right');
+      renderRight(); 
     } else {
-      // feedback for wrong answer 
+      console.log('you are wrong');
+      renderWrong();
     }
   })
 }
-// function submitAnswer() {
-//   $('.jungleBox').on('submit', function (event) {
-//     event.preventDefault();
-//     $('.altBox').hide();
-//     $('.response').show();
-//     let selected = $('input:checked');       IDEA 1
-//     let answer = selected.val();
-//     let correct = STORE[questionNumber].correctAnswer;
-//     if (answer === correct) {
-//       correctAnswer();
-//     } else {
-//       wrongAnswer();
-//     }
-//   });
-// }
-//     let bool = (answer) => {
-//     let select = STORE.questions[STORE.currentQuestion];
-//     return userAnswer === select.correctAnswer;
-//   }
-//   $('form').on('click','#next-question', e => {
-//     e.preventDefault();                                       IDEA 2
-//     let usrInput = $('input[name=radio]:checked').val();
-//     if (usrInput) {
-//       let win = 
-//     }
-//   })
-// }
-// $('body').on('click', '.form', e => {
-//   e.preventDefault();
-//   let curQ = STORE.questions[STORE.currentQuestion];             IDEA 3
-//   let optionSel = $('input[name=radio]:checked').val();
-//   if(!optionSel) {
-//     alert("No Option Selected");
-//   }
-// })
-// // userAnswer needs to be the value of the radio button the user clicks
-// //console.log(userAnswer);
-// console.log(STORE.questions[currentQuestion].correctAnswer);
-// //let userSelection = $('.submit[name=options]:checked', '#f1').val();      IDEA 4 - USER FEEDBACK
-// if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
-//   $('h1').html('you got it right!!');
-// } else {
-//   $('h1').html(
-//     'you got it wrong!!');
-// }
 
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion() {
