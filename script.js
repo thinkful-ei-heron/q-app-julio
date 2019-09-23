@@ -146,6 +146,7 @@ function submitAnswer() {
     console.log(usrAns);
     console.log(STORE.questions[currentQuestion].correctAnswer);
   });
+  currentQuestion++;
   verifyAnswer();
 }
 
