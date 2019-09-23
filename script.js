@@ -71,17 +71,24 @@ function beginQuiz(){
   // html posted to page
   const html = $(`
   <h2> How well do you rememeber the show The Office? Let's find out.
-  </h2>`);
-  $('.submit').html('Start');
+  </h2>
+  <form  class ='start'>
+            <div class="quiz-content">
+                <button class="submit" type='submit'></button>
+         </div> 
+            </form>`
+  );
+  $('.start').html('Start');
   $('h2').html(html);
   
   // listeneer for click to progress. 
-  $('.submit').on('click', e => {
+  $('.submit').submit( e => {
+    console.log('click was heard');
     e.preventDefault();
-    renderQuestion();
-    updateQuestion();
-    updateScore();
-    updateOptions();
+    //renderQuestion();
+    //updateQuestion();
+    //updateScore();
+    //updateOptions();
     currentQuestion++;
   }
   );
@@ -103,7 +110,7 @@ function updateQuestion(){
 function updateScore(){
   const html = $(`
   <ul>
-    <li class="score">Score: ${score}
+    <li class="score">Score: ${score + 1}
     </li>
   <ul>`);
   $('.score').html(html);
@@ -150,23 +157,68 @@ function renderResult(){
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
-  $('body').on('click', '#next-guestion', e => {
+//   
+  $('.quiz-content').on('submit', e => {
     e.preventDefault();
-    STORE.currentQuestion === STORE.questions.length ? updateScore() : renderQuestion(); 
-    
-    console.log(userAnswer);
-  });
-  // userAnswer needs to be the value of the radio button the user clicks
-  //console.log(userAnswer);
-  console.log(STORE.questions[currentQuestion].correctAnswer);
-  //let userSelection = $('.submit[name=options]:checked', '#f1').val();
-  if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
-    $('h1').html('you got it right!!');
-  } else {
-    $('h1').html(
-      'you got it wrong!!');
-  }
+    let usrInput = $('input:checked');
+    let usrAns = usrInput.val();
+    console.log(usrAns);
+    let correct = STORE[currentQuestion].correctAnswer;
+    if(usrAns === correct) {
+      // feedback for correct answer & should run updateScore 
+    } else {
+      // feedback for wrong answer 
+    }
+  })
 }
+// function submitAnswer() {
+//   $('.jungleBox').on('submit', function (event) {
+//     event.preventDefault();
+//     $('.altBox').hide();
+//     $('.response').show();
+//     let selected = $('input:checked');       IDEA 1
+//     let answer = selected.val();
+//     let correct = STORE[questionNumber].correctAnswer;
+//     if (answer === correct) {
+//       correctAnswer();
+//     } else {
+//       wrongAnswer();
+//     }
+//   });
+// }
+
+
+//     let bool = (answer) => {
+//     let select = STORE.questions[STORE.currentQuestion];
+//     return userAnswer === select.correctAnswer;
+//   }
+//   $('form').on('click','#next-question', e => {
+//     e.preventDefault();                                       IDEA 2
+//     let usrInput = $('input[name=radio]:checked').val();
+//     if (usrInput) {
+//       let win = 
+//     }
+//   })
+// }
+  // $('body').on('click', '.form', e => {
+  //   e.preventDefault();
+  //   let curQ = STORE.questions[STORE.currentQuestion];             IDEA 3
+  //   let optionSel = $('input[name=radio]:checked').val();
+  //   if(!optionSel) {
+  //     alert("No Option Selected");
+  //   }
+  // })
+  // // userAnswer needs to be the value of the radio button the user clicks
+  // //console.log(userAnswer);
+  // console.log(STORE.questions[currentQuestion].correctAnswer);
+  // //let userSelection = $('.submit[name=options]:checked', '#f1').val();      IDEA 4 - USER FEEDBACK
+  // if (userAnswer === STORE.questions[currentQuestion].correctAnswer){
+  //   $('h1').html('you got it right!!');
+  // } else {
+  //   $('h1').html(
+  //     'you got it wrong!!');
+  // }
+
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion(){
 
@@ -175,8 +227,8 @@ function finalQuestion(){
 // function that calls all other functions
 function callOtherFunctions(){
   beginQuiz();
-  renderResult();
-  finalQuestion();
+  //renderResult();
+  //finalQuestion();
   console.log('callOtherFunctions is running');
 }
 
