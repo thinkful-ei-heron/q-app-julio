@@ -138,30 +138,27 @@ function addQuestionToPage() {
 
 function submitAnswer() {
   $('main').on('submit','.questions', e => {
-    console.log('questions form submitted');
+
     e.preventDefault();
-    //e.renderResult();
     let usrInput = $('input:checked');
     usrAns = usrInput.val();
-    console.log(usrAns);
-    console.log(STORE.questions[currentQuestion].correctAnswer);
+  
   });
-  currentQuestion++;
   verifyAnswer();
 }
 
 function nextQuestion(){
-  $('main').on('submit','.submit', e => {
+  $('.submit').on('submit', e => {
     e.preventDefault();
     console.log('nextQuestion is runnnnnning.');
-    currentQuestion++;
     renderQuestion();
     updateQuestion();
     renderScore();
     generateUpdateOptionsHTML();
     addQuestionToPage();
-    submitAnswer();
+    
   });
+  
 }
 
 // function that displays current question
@@ -182,28 +179,26 @@ function renderRight() {
   $('.questions').after(html);
   renderScore();
   nextQuestion();
-  console.log('renderRight is running');
+  currentQuestion++;
 }
 
 function renderWrong() {
   let html = `<p>You are Wrong! The correct answer was ${STORE.questions[currentQuestion].correctAnswer}.</p>`;
   $('.questions').after(html);
   nextQuestion();
-  console.log('renderWrong is running');
+  currentQuestion++;
+
 }
 
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer() {
   let correct = STORE.questions[currentQuestion].correctAnswer;
-  console.log('this ran');
-  console.log('is this running?')
+
   $('main').on('submit','.questions', e => {
     e.preventDefault();
     if (usrAns === correct) {
-      console.log('you are right');
       renderRight(); 
     } else {
-      console.log('you are wrong');
       renderWrong();
     }
   })
