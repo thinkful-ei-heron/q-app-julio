@@ -1,11 +1,8 @@
 * { 
     box-sizing: border-box;
     text-align: center;
-}
-.big_box {
-    border: 1px solid grey;
-    border-radius: 5px;
     background-color: beige;
+    font-family: AmericanTypewriter;
 }
 
 li {

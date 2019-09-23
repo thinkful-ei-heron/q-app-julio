@@ -56,13 +56,12 @@ const STORE = {
       correctAnswer: '...the flippity flop.'
     }
   ],
-  correctMessage: 'You are right!',
-  wrongMessege: 'You are wrong!',
   answered: false,
   quizStarted: false,
   currentQuestion: 0,
   score: 0,
   usrAns: null,
+  answerCorrect: null
 };
 
 
@@ -99,6 +98,9 @@ function render(){
   `;
     $('main').html(html);
   }
+  else if(STORE.correctAnswer === true){
+    const html = `<h3>this is here correct</h3>`;
+  }
   else if (STORE.quizStarted === false){
     const html = $(`
   <h2> How well do you remember the show The Office? Let's find out.
@@ -124,7 +126,7 @@ function statusOfQuiz() {
      <li class="question-number">Question Number: ${STORE.currentQuestion}/5</li>
      <li class="score">Score: ${STORE.score}</li>
   </ul>
-  `
+  `;
   $('h2').after(html);
 }
 
@@ -185,9 +187,9 @@ function submitAnswer() {
     render();
   });
   if(STORE.usrAns === correct) {
-    $('main').html(STORE.correctMessage);
+    STORE.correctAnswer = true;
   } else {
-    console.log(STORE.wrongMessege)
+    STORE.correctAnswer = false;
   }
 }
 
@@ -205,15 +207,7 @@ function submitAnswer() {
 //   })
 // }
 
-function nextQuestion(){
-  $('#next-question').on('submit','#next-question', e => {
-    console.log('nextQuestion is runnnnnnning');
-    e.preventDefault();
-    STORE.currentQuestion++;
-    render();
-  });
-  
-}
+
 
 // function that displays current question
 // function renderQuestion() {
