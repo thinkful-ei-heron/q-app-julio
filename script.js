@@ -76,13 +76,12 @@ function beginQuiz(){
   $('h2').html(html);
   
   // listeneer for click to progress. 
-  $('.start').on('click', e => {
+  $('.start1').on('submit', e => {
     e.preventDefault();
     renderQuestion();
     updateQuestion();
     updateScore();
     updateOptions();
-    currentQuestion++;
   }
   );
   console.log(currentQuestion);
@@ -90,7 +89,6 @@ function beginQuiz(){
 }
 // function to update the question
 function updateQuestion(){
-  
   const html = $(`
   <ul>
     <li class="question-number">Question Number: ${currentQuestion + 1}/${STORE.questions.length}
@@ -123,7 +121,7 @@ function updateOptions(){
       <input type='radio' name='radio' value=${optionList[i + 1]}>${optionList[i + 1]}</input><br>
       <input type='radio' name='radio' value=${optionList[i + 2]}>${optionList[i + 2]}</input><br>
       <input type='radio' name='radio' value=${optionList[i + 3]}>${optionList[i + 3]}</input><br>
-      <button class="submit" id="next-question">Submit</button>
+      <button class="submit" id="next-question" type="submit">Submit</button>
     </form>
       `);
     $('.quiz-content').parent().html(html);
@@ -135,8 +133,9 @@ function updateOptions(){
 
 // function that displays current question
 function renderQuestion(){
-  console.log(STORE.questions[currentQuestion].question);
-  const html = $(`<h2>${STORE.questions[currentQuestion].question}</h2>`);
+  let curQue = STORE.questions[currentQuestion].question ;
+  console.log(curQue);
+  const html = $(`<h2>${curQue}</h2>`);
   $('h2').html(html);
   console.log('renderQuestion is running');
 }
@@ -151,7 +150,7 @@ function renderResult(){
 // Checks the value of user inpout to correct answer and evaluates
 function verifyAnswer(userAnswer) {
 //   
-  $('.quiz-content').on('submit', e => {
+  $('.form').on('submit', e => {
     e.preventDefault();
     let usrInput = $('input:checked');
     let usrAns = usrInput.val();
@@ -179,8 +178,6 @@ function verifyAnswer(userAnswer) {
 //     }
 //   });
 // }
-
-
 //     let bool = (answer) => {
 //     let select = STORE.questions[STORE.currentQuestion];
 //     return userAnswer === select.correctAnswer;
