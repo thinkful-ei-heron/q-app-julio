@@ -1,6 +1,5 @@
 // https://github.com/thinkful-ei-heron/q-app-julio-wesley.git
 'use strict';
-
 // Store is the questions, answers, correct answers, and score.
 // Store is a global object.
 const STORE = {
@@ -64,11 +63,7 @@ const STORE = {
   score: 0,
   usrAns: null,
 };
-
-
 // get the right Question displayed, get scoring and feedback working.
-
-
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
 function beginQuiz() {
   // listener for click to progress. 
@@ -78,20 +73,8 @@ function beginQuiz() {
     STORE.quizStarted = true;
     render();
   }
-  );
-  // console.log('beginQuiz is running');
+  ); 
 }
-
-// function restartQuiz() {
-//   $('main').on('click','#nextQuestion', e => {
-//     e.preventDefault();
-//     if(currentQuestion === STORE.questions.length) {
-//       STORE.quizStarted = false;
-//     }
-//   })
-//   render();
-// }
-
 function endResults() {
   let resultHTML =
     `<p> Your Score is ${STORE.score} / 5 ! </p>
@@ -102,8 +85,6 @@ function endResults() {
   $("main").html(resultHTML);
   console.log('hey there');
 }
-
-
 function handleNextQuestionButton(){
   $('main').on('click','#nextQuestion', e => {
     e.preventDefault();
@@ -116,8 +97,6 @@ function handleNextQuestionButton(){
     }
   });
 }
-
-
 function render(){
   if (STORE.answered === true){
     let html = `
@@ -143,7 +122,6 @@ function render(){
     verifyAnswer();
   }
 }
-
 function statusOfQuiz() {
   const html = `
   <ul>
@@ -168,7 +146,6 @@ function generateUpdateOptionsHTML() {
     `;
   return html;
 }
-
 function addQuestionToPage() {
   // generates current options
   let options = generateUpdateOptionsHTML();
@@ -176,7 +153,6 @@ function addQuestionToPage() {
   let question = `<h2>${STORE.questions[STORE.currentQuestion].question}</h2>`;
   $('main').html(question + options);
 }
-
 function submitAnswer() {
   $('main').on('submit','.questions', e => {
     e.preventDefault();
@@ -188,7 +164,6 @@ function submitAnswer() {
     console.log(STORE.currentQuestion);
   });
 }
-  
 function verifyAnswer() {
   let correct = STORE.questions[STORE.currentQuestion].correctAnswer;
   if(STORE.usrAns === correct) {
@@ -198,11 +173,6 @@ function verifyAnswer() {
     $('p').html(STORE.wrongMessege)
   }
 }
-
-// Checks the value of user inpout to correct answer and evaluates
-
-// function that checks if the end of the question list has been reached; if yes, than restart the quiz
-
 // function that calls all other functions
 function callOtherFunctions() {
   beginQuiz();
@@ -210,7 +180,5 @@ function callOtherFunctions() {
   handleNextQuestionButton();
   render();
 }
-
 // jQuery function
-
 $(callOtherFunctions);
