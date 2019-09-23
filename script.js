@@ -173,17 +173,11 @@ function submitAnswer() {
   $('main').on('submit','.questions', e => {
 
     e.preventDefault();
-<<<<<<< HEAD
     STORE.answered = true;
     //e.renderResult();
     let usrInput = $('input:checked');
     usrAns = usrInput.val();
     render();
-=======
-    let usrInput = $('input:checked');
-    usrAns = usrInput.val();
-  
->>>>>>> 4fa4b8bfdece562c814c86da05a82163c27b62df
   });
   //verifyAnswer();
 }
@@ -192,18 +186,8 @@ function nextQuestion(){
   $('#next-question').on('submit','#next-question', e => {
     console.log('nextQuestion is runnnnnnning');
     e.preventDefault();
-<<<<<<< HEAD
     STORE.currentQuestion++;
     render();
-=======
-    currentQuestion++;
-    renderQuestion();
-    updateQuestion();
-    renderScore();
-    generateUpdateOptionsHTML();
-    addQuestionToPage();
-    
->>>>>>> 4fa4b8bfdece562c814c86da05a82163c27b62df
   });
   
 }
@@ -219,7 +203,6 @@ function nextQuestion(){
 
 // function that checks if input is correct, and if not then input a box that will give the user the correct answer,
 //if the user's input is correct than the page will also render a congratulations page
-<<<<<<< HEAD
 // function renderRight() {
 //   score++;
 //   let html = `
@@ -253,39 +236,6 @@ function nextQuestion(){
 //     }
 //   })
 // }
-=======
-function renderRight() {
-  score++;
-  let html = `
-  <p>You Are Right!</p>`;
-  $('.questions').after(html);
-  renderScore();
-  nextQuestion();
-  currentQuestion++;
-}
-
-function renderWrong() {
-  let html = `<p>You are Wrong! The correct answer was ${STORE.questions[currentQuestion].correctAnswer}.</p>`;
-  $('.questions').after(html);
-  nextQuestion();
-  currentQuestion++;
-
-}
-
-// Checks the value of user inpout to correct answer and evaluates
-function verifyAnswer() {
-  let correct = STORE.questions[currentQuestion].correctAnswer;
-
-  $('main').on('submit','.questions', e => {
-    e.preventDefault();
-    if (usrAns === correct) {
-      renderRight(); 
-    } else {
-      renderWrong();
-    }
-  })
-}
->>>>>>> 4fa4b8bfdece562c814c86da05a82163c27b62df
 
 // function that checks if the end of the question list has been reached; if yes, than restart the quiz
 function finalQuestion() {
