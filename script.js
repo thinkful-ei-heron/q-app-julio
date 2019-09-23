@@ -93,10 +93,9 @@ function beginQuiz() {
 // }
 
 function endResults() {
-  let resultHTML = $(
+  let resultHTML =
     `<p> Your Score is ${STORE.score} / 5 ! </p>
-     <button id="restart">Restart Quiz</button>
-  `);
+     <button id="restart">Restart Quiz</button>`;
   STORE.currentQuestion = 0 ;
   STORE.score = 0 ;
   STORE.quizStarted = false;
@@ -117,18 +116,18 @@ console.log(STORE.currentQuestion)
 console.log(STORE.questions.length)
 
 function handleNextQuestionButton(){
-  if(STORE.currentQuestion !== 4) {
-    $('main').on('click','#nextQuestion', e => {
-      e.preventDefault();
-      STORE.currentQuestion++;
+  $('main').on('click','#nextQuestion', e => {
+    e.preventDefault();
+    STORE.currentQuestion++;
+    if(STORE.currentQuestion !== 5) {
       STORE.answered = false;
       render();
-    });
-  } else {
-    endResults();
-    render();
-  }
+    } else {
+      endResults();
+    }
+  });
 }
+
 
 function render(){
   if (STORE.answered === true){
