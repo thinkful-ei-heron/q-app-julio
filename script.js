@@ -25,7 +25,7 @@ const STORE = {
       correctAnswer: 'Chilli'
     },
     { //3
-      question: 'What is the name of Jan\'s talanted assistant?',
+      question: 'What is the name of Jan\'s talented assistant?',
       answerOptions: [
         'David Wallace',
         'Pete',
@@ -55,8 +55,8 @@ const STORE = {
       correctAnswer: '...the flippity flop.'
     }
   ],
-  correctMessege: 'You are right!',
-  wrongMessege: `You are wrong! The correct answer is ${'this?'}!`,
+  correctMessage: 'You are right!',
+  wrongMessage: 'You are wrong! The correct answer is !',
   answered: false,
   quizStarted: false,
   currentQuestion: 0,
@@ -66,6 +66,7 @@ const STORE = {
 };
 // get the right Question displayed, get scoring and feedback working.
 // function that will begin the quiz, this function will also be used at the end to restart the quiz
+
 function beginQuiz() {
   // listener for click to progress. 
   $('main').on('submit', '.start', e => {
@@ -78,12 +79,12 @@ function beginQuiz() {
 }
 function endResults() {
   let resultHTML =
-    `<p> Your Score is ${STORE.score} / 5 ! </p>
-     <button id="nextQuestion">Restart Quiz</button>`;
-  STORE.currentQuestion = 0 ;
+    `<p aria-label="Your score is ${STORE.score} / 5"> Your Score is ${STORE.score} / 5 ! </p>
+     <button aria-label="Restart" id="nextQuestion">Restart Quiz</button>`;
+  STORE.currentQuestion = -1 ;
   STORE.score = 0 ;
   STORE.quizStarted = false;
-  $("main").html(resultHTML);
+  $('main').html(resultHTML);
   console.log('hey there');
 }
 function handleNextQuestionButton(){
@@ -102,20 +103,20 @@ function render(){
   if (STORE.answered === true){
     let html = `
   <p></p>
-  <button id="nextQuestion">Next Question</button>
+  <button aria-label="Next Question" id="nextQuestion">Next Question</button>
   `;
     $('main').html(html);
   }
   else if(STORE.correctAnswer === true){
-    const html = `<h3>this is here correct</h3>`;
+    //const html = `<h3>this is here correct</h3>`;
   }
   else if (STORE.quizStarted === false){
     const html = $(`
   <h2> How well do you remember the show The Office? Let's find out.
   </h2>
-  <form class="start">
+  <form class="start" role="form">
     <div class="quiz-content">
-      <button class="submit" type='submit'>Start</button>
+      <button aria-label="Start Quiz" class="submit" type='submit'>Start</button>
     </div> 
   </form>`
     );
@@ -141,11 +142,11 @@ function generateUpdateOptionsHTML() {
   let html = '<form class="questions">';
   for (let i = 0; i < optionList.length; i++) {
     html += `
-      <input type='radio' name='radio' value="${optionList[i]}">${optionList[i]}</input><br>
+      <input type='radio' aria-label="${optionList[i]}" name='radio' value="${optionList[i]}">${optionList[i]}</input><br>
     `;
   }
   html += `
-    <button class="submit" id="next-question" type="submit">Submit</button>
+    <button aria-label="submit" class="submit" id="next-question" type="submit">Submit</button>
     </form>
     `;
   return html;
@@ -171,10 +172,10 @@ function submitAnswer() {
 function verifyAnswer() {
   let correct = STORE.questions[STORE.currentQuestion].correctAnswer;
   if(STORE.usrAns === correct) {
-    $('p').html(STORE.correctMessege);
+    $('p').html(STORE.correctMessage);
     STORE.score++;
   } else {
-    $('p').html(STORE.wrongMessege)
+    $('p').html(`You were wrong! The correct answer was "${correct}"`);
   }
 }
 // function that calls all other functions
@@ -184,5 +185,6 @@ function callOtherFunctions() {
   handleNextQuestionButton();
   render();
 }
+//alert( STORE.questions.correctAnswer.currentQuestion);
 // jQuery function
 $(callOtherFunctions);
