@@ -56,7 +56,7 @@ const STORE = {
     }
   ],
   correctMessage: 'You are right!',
-  wrongMessage: 'You are wrong! The correct answer is !',
+  wrongMessage: `You are wrong! The correct answer is!`,
   answered: false,
   quizStarted: false,
   currentQuestion: 0,
