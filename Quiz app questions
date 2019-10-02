@@ -1,0 +1,105 @@
+questions for the quiz.
+Who said it, theOffice
+
+Questions 1:
+  What did Jim give Pam for secret santa?
+    1. iPod
+    2. Book
+    3. TeaPot
+    4. Toothbrush
+
+Questions 5:
+  Kevin's family has a secret family recipie for?
+    1. Lasagna
+    2. Chilli
+    3. Tacos
+    4. MeatBalls
+
+Questions 7:
+  Name of Jan's talanted assistant?
+    1. Wallace
+    2. Pete
+    3. Clayton
+    4. Hunter
+
+
+Questions 9:
+  The office olympics included what sport?
+    1. Table tennis
+    2. Sputnick
+    3. Flonkerton
+    4. Blomp-top
+
+Questions 10:
+  This quiz is over, 'catch you on...'?
+    1. 'the flip side'
+    2. 'the flippity flop'
+    3. 'the other side'
+    4. Tooth brush
+
+
+'use strict';
+
+// Store is the questions, answers, correct answers, and score.
+// Store is a global object.
+const STORE = {
+  questions: [//1
+    {
+      question: 'What did Jim get Pam as a secret Santa gift?',
+      answerOptions: [
+        'An iPod', 
+        'A book', 
+        'A teapot', 
+        'A toothbrush'
+      ],
+      correctAnswer: 'A teapot'
+    },
+    { //2
+      question: 'Kevin\'s family has a secret family recipie for?',
+      answerOptions: [
+        'Lasagna', 
+        'Chilli', 
+        'Tacos', 
+        'Meatballs'
+      ],
+      correctAnswer: 'Chilli'
+    },
+    { //3
+      question: 'What is the name of Jan\'s talanted assistant?',
+      answerOptions: [
+        'David Wallace', 
+        'Pete', 
+        'Clayton', 
+        'Hunter'
+      ],
+      correctAnswer: 'Hunter'
+    },
+    { //4
+      question: 'The office olympics included what sport?',
+      answerOptions: [
+        'Table-tennis', 
+        'Sputnick', 
+        'Flonkerton', 
+        'Blomp-top'
+      ],
+      correctAnswer: 'Flonkerton'
+    },
+    { //5
+      question: 'This quiz is over, "catch you on..."?',
+      answerOptions: [
+        '...the flip side.', 
+        '...the flippity flop.', 
+        '...the other side.', 
+        'Toothbrush.'
+      ],
+      correctAnswer: '...the flippity flop.'
+    }
+  ]
+};
+    
+  
+
+
+
+
+

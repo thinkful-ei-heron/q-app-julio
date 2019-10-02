@@ -1,0 +1,22 @@
+Notes for pre-requisite day 05
+
+Avoid spaghetti code: which is - unstructured and difficult to maintain source code. 
+
+it becomes important to seperate out your code into disticnt functions that have narrow, specific responsabilities. 
+
+user-stories: short, plain, language descriptions of what your app does. 
+  ex: user-stories for our shopping list app.
+    - A shopping list should be rendered to the page
+    - You should be able to add items to the list
+    - You should be able to check items on the list
+    - You should be able to delete items from the list
+
+spaghetti code doesn't scale. do your best to write small and clear functions and code. Always imagine someone else is picking up after you to finish.
+
+don't just start to write code at the beginning of a project. BAD IDEA.
+
+
+converting user-stories to function stubs
+
+pseudocode: code that is intended for human reading and not the computer reading. 
+

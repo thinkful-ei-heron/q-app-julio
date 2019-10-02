@@ -142,7 +142,7 @@ function generateUpdateOptionsHTML() {
   let html = '<form class="questions">';
   for (let i = 0; i < optionList.length; i++) {
     html += `
-      <input type='radio' aria-label="${optionList[i]}" name='radio' value="${optionList[i]}">${optionList[i]}</input><br>
+      <input type='radio' aria-label="${optionList[i]}" name='radio' value="${optionList[i]}" required>${optionList[i]}</input><br>
     `;
   }
   html += `
